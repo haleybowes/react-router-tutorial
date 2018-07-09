@@ -21,8 +21,11 @@ class SearchBar extends Component {
         e.preventDefault();
 
         // go and fetch weather data
+
+        // search the api using the search term
         this.props.fetchWeather(this.state.term)
         this.setState({
+            // clear the search input after the user has submitted the form
             term: ''
         })
     }
@@ -45,7 +48,9 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
+    // whenever action acreator gets called, bind them with the dispatch to make sure that the actions flow fown into the middleware and then into the reducers, then the rest of the application
     return bindActionCreators({fetchWeather}, dispatch)
 }
 
+// mapDispatchToProps always has to be the 2nd argument, null is referring to the fact that the component doesn't need to access state
 export default connect(null, mapDispatchToProps)(SearchBar)
